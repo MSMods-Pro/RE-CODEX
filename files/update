@@ -79,6 +79,12 @@ banner() {
     echo -e "    ${c}██║░░██╗██║░░██║██║░░██║██╔══╝░░░██╔██╗░"
     echo -e "    ${c}╚█████╔╝╚█████╔╝██████╔╝███████╗██╔╝╚██╗"
     echo -e "    ${c}░╚════╝░░╚════╝░╚═════╝░╚══════╝╚═╝░░╚═╝${n}"
+    echo -e "    ${b}╭══════════════════════════════════════════╗"
+    echo -e "    ${b}┃ ${g}[${n}ム${g}] ᴛɢ: ${y}t.me/alphacodex369"
+    echo -e "    ${b}┃ ${g}[${n}ム${g}] ᴛɢ: ${y}t.me/MSModsPro"
+    echo -e "    ${b}┃❁ ${g}ᴄʀᴇᴀᴛᴏʀ: ${y}ᴅx-ᴄᴏᴅᴇx"
+    echo -e "    ${b}┃❁ ${g}ʀᴇ-ᴄʀᴇᴀᴛᴏʀ: ${y}ms-ᴄᴏᴅᴇx"
+    echo -e "    ${b}╰════════════════════════════════════════════╝${n}"
     echo
 }
 
@@ -115,10 +121,10 @@ sleep 1.5
 
 cd "$HOME" || exit 1
 rm -rf CODEX
-git clone https://github.com/Alpha-Codex369/CODEX.git >/dev/null 2>&1 &
+git clone https://github.com/MSMods-Pro/RE-CODEX.git >/dev/null 2>&1 &
 spin
 
 if [ -d "CODEX" ]; then
-    cd CODEX || exit 1
+    cd RE-CODEX || exit 1
     bash install.sh
 fi

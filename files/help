@@ -94,6 +94,7 @@ fi
 # Info bar
 echo -e "\n${b}╭══ ${g}〄 ${y}ᴄᴏᴅᴇx ${g}〄"
 echo -e "${b}┃❁ ${g}ᴄʀᴇᴀᴛᴏʀ: ${y}ᴅx-ᴄᴏᴅᴇx"
+echo -e "${b}┃❁ ${g}ʀᴇ-ᴄʀᴇᴀᴛᴏʀ: ${y}ms-ᴄᴏᴅᴇx"
 echo -e "${b}┃❁ ${g}ᴅᴇᴠɪᴄᴇ: ${y}${devicename}"
 echo -e "${b}┃❁ ${g}ᴅɪꜱᴋ: ${y}${data}"
 echo -e "${b}╰┈➤ ${g}[${n}${USER}${g}] ${g}Hey ${y}${username}"

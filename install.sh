@@ -56,7 +56,7 @@ exit_script() {
     echo -e "\n ${g}[${n}${KER}${g}] ${c}Exiting ${g}Codex Banner \033[1;36m"
     echo
     cd "$HOME"
-    rm -rf "$HOME/CODEX"
+    rm -rf "$HOME/RE-CODEX"
     kill -9 $PPID 2>/dev/null
     exit 0
 }
@@ -336,30 +336,30 @@ setup_termux_paths() {
     dx="$ds/font.ttf"
     simu="$ds/colors.properties"
     if [ ! -f "$dx" ]; then
-        cp $HOME/CODEX/files/font.ttf "$ds"
+        cp $HOME/RE-CODEX/files/font.ttf "$ds"
     fi
     if [ ! -f "$simu" ]; then
-        cp $HOME/CODEX/files/colors.properties "$ds"
+        cp $HOME/RE-CODEX/files/colors.properties "$ds"
     fi
-    mv $HOME/CODEX/files/chat $HOME/.toolx/
+    mv $HOME/RE-CODEX/files/chat $HOME/.toolx/
     chmod +x $HOME/.toolx/chat
-    mv $HOME/CODEX/files/unstall $HOME/.toolx/
+    mv $HOME/RE-CODEX/files/unstall $HOME/.toolx/
     chmod +x $HOME/.toolx/unstall
-    mv $HOME/CODEX/files/bname $HOME/.toolx/
+    mv $HOME/RE-CODEX/files/bname $HOME/.toolx/
     chmod +x $HOME/.toolx/bname
-    mv $HOME/CODEX/files/simu $PREFIX/bin/
+    mv $HOME/RE-CODEX/files/simu $PREFIX/bin/
     chmod +x $PREFIX/bin/simu
-    mv $HOME/CODEX/files/dev $HOME/.toolx/
+    mv $HOME/RE-CODEX/files/dev $HOME/.toolx/
     chmod +x $HOME/.toolx/dev
-    mv $HOME/CODEX/files/update $HOME/.toolx/
+    mv $HOME/RE-CODEX/files/update $HOME/.toolx/
     chmod +x $HOME/.toolx/update
-    mv $HOME/CODEX/files/help $HOME/.toolx/
+    mv $HOME/RE-CODEX/files/help $HOME/.toolx/
     chmod +x $HOME/.toolx/help
-    mv $HOME/CODEX/files/btheme $HOME/.toolx/
+    mv $HOME/RE-CODEX/files/btheme $HOME/.toolx/
     chmod +x $HOME/.toolx/btheme
-    mv $HOME/CODEX/files/sysinfo $HOME/.toolx/
+    mv $HOME/RE-CODEX/files/sysinfo $HOME/.toolx/
     chmod +x $HOME/.toolx/sysinfo
-    mv $HOME/CODEX/files/code $PREFIX/bin/
+    mv $HOME/RE-CODEX/files/code $PREFIX/bin/
     chmod +x $PREFIX/bin/code
     termux-reload-settings
 }
@@ -367,27 +367,27 @@ setup_termux_paths() {
 setup_linux_paths() {
     mkdir -p $HOME/.toolx
     mkdir -p ~/.local/share/fonts
-    cp $HOME/CODEX/files/font.ttf ~/.local/share/fonts/
+    cp $HOME/RE-CODEX/files/font.ttf ~/.local/share/fonts/
     fc-cache -fv  > /dev/null
-    mv $HOME/CODEX/files/chat $HOME/.toolx/
+    mv $HOME/RE-CODEX/files/chat $HOME/.toolx/
     chmod +x $HOME/.toolx/chat
-    mv $HOME/CODEX/files/unstall $HOME/.toolx/
+    mv $HOME/RE-CODEX/files/unstall $HOME/.toolx/
     chmod +x $HOME/.toolx/unstall
-    mv $HOME/CODEX/files/bnamel $HOME/.toolx/
+    mv $HOME/RE-CODEX/files/bnamel $HOME/.toolx/
     chmod +x $HOME/.toolx/bname
-    mv $HOME/CODEX/files/dev $HOME/.toolx/
+    mv $HOME/RE-CODEX/files/dev $HOME/.toolx/
     chmod +x $HOME/.toolx/dev
-    sudo mv $HOME/CODEX/files/simu /usr/local/bin/
+    sudo mv $HOME/RE-CODEX/files/simu /usr/local/bin/
     sudo chmod +x /usr/local/bin/simu
-    mv $HOME/CODEX/files/update $HOME/.toolx/
+    mv $HOME/RE-CODEX/files/update $HOME/.toolx/
     chmod +x $HOME/.toolx/update
-    mv $HOME/CODEX/files/help $HOME/.toolx/
+    mv $HOME/RE-CODEX/files/help $HOME/.toolx/
     chmod +x $HOME/.toolx/help
-    mv $HOME/CODEX/files/btheme $HOME/.toolx/
+    mv $HOME/RE-CODEX/files/btheme $HOME/.toolx/
     chmod +x $HOME/.toolx/btheme
-    mv $HOME/CODEX/files/sysinfo $HOME/.toolx/
+    mv $HOME/RE-CODEX/files/sysinfo $HOME/.toolx/
     chmod +x $HOME/.toolx/sysinfo
-    sudo mv $HOME/CODEX/files/code /usr/local/bin/
+    sudo mv $HOME/RE-CODEX/files/code /usr/local/bin/
     chmod +x /usr/local/bin/code
 }
 
@@ -476,8 +476,8 @@ donotchange() {
     fi
     
     USERNAME_FILE="$D1/usernames.txt"
-    INPUT_FILE="$HOME/CODEX/files/.zshrc"
-    THEME_INPUT="$HOME/CODEX/files/.codex.zsh-theme"
+    INPUT_FILE="$HOME/RE-CODEX/files/.zshrc"
+    THEME_INPUT="$HOME/RE-CODEX/files/.codex.zsh-theme"
     OUTPUT_ZSHRC="$HOME/.zshrc"
     OUTPUT_THEME="$HOME/.oh-my-zsh/themes/codex.zsh-theme"
     TEMP_FILE="$HOME/temp.zshrc"
@@ -537,18 +537,14 @@ banner() {
     echo -e "${c}               |D|X|-|C|O|D|E|X|"
     echo -e "${y}               +-+-+-+-+-+-+-+-+${n}"
     echo
-    if [ $random_number -eq 0 ]; then
-        echo -e "${b}╭════════════════════════⊷"
-        echo -e "${b}┃ ${g}[${n}ム${g}] ᴛɢ: ${y}t.me/Termuxcodex"
-        echo -e "${b}╰════════════════════════⊷"
-    else
-        echo -e "${b}╭══════════════════════════⊷"
-        echo -e "${b}┃ ${g}[${n}ム${g}] ᴛɢ: ${y}t.me/alphacodex369"
-        echo -e "${b}╰══════════════════════════⊷"
-    fi
+    echo -e "${b}╭═══════════════════════════════════════⊷"
+    echo -e "${b}┃ ${g}[${n}ム${g}] ᴛɢ: ${y}t.me/alphacodex369"
+    echo -e "${b}┃ ${g}[${n}ム${g}] ᴛɢ: ${y}t.me/MSModsPro"
+    echo -e "${b}╰═══════════════════════════════════════⊷"
     echo
     echo -e "${b}╭══ ${g}〄 ${y}ᴄᴏᴅᴇx ${g}〄"
     echo -e "${b}┃❁ ${g}ᴄʀᴇᴀᴛᴏʀ: ${y}ᴅx-ᴄᴏᴅᴇx"
+    echo -e "${b}┃❁ ${g}ʀᴇ-ᴄʀᴇᴀᴛᴏʀ: ${y}ms-ᴄᴏᴅᴇx"
     echo -e "${b}┃❁ ${g}ᴅᴇᴠɪᴄᴇ: ${y}${VENDOR} ${MODEL}"
     echo -e "${b}╰┈➤ ${g}Hey ${y}Dear"
     echo
@@ -577,7 +573,7 @@ setupx() {
         linux_spin
     fi
 
-    if [ -d "$HOME/CODEX" ]; then
+    if [ -d "$HOME/RE-CODEX" ]; then
         sleep 2
         clear
         banner
@@ -602,7 +598,7 @@ setupx() {
         echo
         sleep 3
         cd "$HOME"
-        rm -rf "$HOME/CODEX"
+        rm -rf "$HOME/RE-CODEX"
         kill -9 $PPID 2>/dev/null
         exit 0
     else
@@ -629,18 +625,14 @@ banner2() {
     echo -e "${c}               |D|X|-|C|O|D|E|X|"
     echo -e "${y}               +-+-+-+-+-+-+-+-+${n}"
     echo
-    if [ $random_number -eq 0 ]; then
-        echo -e "${b}╭════════════════════════⊷"
-        echo -e "${b}┃ ${g}[${n}ム${g}] ᴛɢ: ${y}t.me/Termuxcodex"
-        echo -e "${b}╰════════════════════════⊷"
-    else
-        echo -e "${b}╭══════════════════════════⊷"
-        echo -e "${b}┃ ${g}[${n}ム${g}] ᴛɢ: ${y}t.me/alphacodex369"
-        echo -e "${b}╰══════════════════════════⊷"
-    fi
+    echo -e "${b}╭═══════════════════════════════════════⊷"
+    echo -e "${b}┃ ${g}[${n}ム${g}] ᴛɢ: ${y}t.me/alphacodex369"
+    echo -e "${b}┃ ${g}[${n}ム${g}] ᴛɢ: ${y}t.me/MSModsPro"
+    echo -e "${b}╰═══════════════════════════════════════⊷"
     echo
     echo -e "${b}╭══ ${g}〄 ${y}ᴄᴏᴅᴇx ${g}〄"
     echo -e "${b}┃❁ ${g}ᴄʀᴇᴀᴛᴏʀ: ${y}ᴅx-ᴄᴏᴅᴇx"
+    echo -e "${b}┃❁ ${g}ʀᴇ-ᴄʀᴇᴀᴛᴏʀ: ${y}ms-ᴄᴏᴅᴇx"
     echo -e "${b}╰┈➤ ${g}Hey ${y}Dear"
     echo
     echo -e "${c}╭════════════════════════════════════════════════⊷"
