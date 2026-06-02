@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# btheme — CODEX Banner Theme Switcher
+# Standalone script; delegates to the shell function when sourced,
+# or runs standalone when called directly.
+
+r='\033[1;91m'; p='\033[1;95m'; y='\033[1;93m'; g='\033[1;92m'
+n='\033[0m'; b='\033[1;94m'; c='\033[1;96m'; w='\033[1;97m'; lp='\033[38;5;141m'
+A='\033[1;92m[\033[1;00m+\033[1;92m]\033[1;92m'
+E='\033[1;92m[\033[1;00m×\033[1;92m]\033[1;91m'
+CROWN="\uf521"
+
+if [ -d "/data/data/com.termux/files/usr/" ]; then
+    D1="$HOME/.termux"
+else
+    D1="$HOME/.CODEX"
+fi
+BANNER_STYLE_FILE="$D1/banner_style.txt"
+
+choice="${1:-}"
+if [ -z "$choice" ]; then
+    clear
+    echo
+    echo -e " ${b}╭═══ ${g}${CROWN} ${y}ʙᴀɴɴᴇʀ ᴛʜᴇᴍᴇ ${b}═══⊷"
+    echo -e " ${b}┃"
+    echo -e " ${b}┃ ${g}[${n}1${g}] ${c}Original     ${y}(Yellow→Cyan Block)"
+    echo -e " ${b}┃ ${g}[${n}2${g}] ${c}Slant        ${y}(Green→Teal Clean)"
+    echo -e " ${b}┃ ${g}[${n}3${g}] ${c}Flame        ${y}(Red→Orange Neon)"
+    echo -e " ${b}┃ ${g}[${n}4${g}] ${c}Matrix       ${y}(Full Green Cyber)"
+    echo -e " ${b}┃ ${g}[${n}5${g}] ${c}Minimal      ${y}(Cyan→Blue Clean)"
+    echo -e " ${b}┃ ${g}[${n}6${g}] ${c}Royal        ${y}(Purple Crown)"
+    echo -e " ${b}┃ ${g}[${n}7${g}] ${c}Random       ${y}(New style every session)"
+    echo -e " ${b}╰════════════════════⊷${n}"
+    echo
+    read -p "$(echo -e ${A}${g}──[${n}Select 1-7${g}]────► ${n})" choice
+fi
+
+case "$choice" in
+    [1-6])
+        mkdir -p "$D1"
+        echo "$choice" > "$BANNER_STYLE_FILE"
+        echo -e "\n ${A} ${g}Banner style ${c}$choice${g} saved! Restart terminal or run ${c}source ~/.zshrc${g} to apply.${n}"
+        ;;
+    7)
+        rm -f "$BANNER_STYLE_FILE"
+        echo -e "\n ${A} ${g}Random mode enabled! Each new session picks a random style.${n}"
+        ;;
+    *)
+        echo -e " ${E} ${r}Invalid choice.${n}"
+        ;;
+esac

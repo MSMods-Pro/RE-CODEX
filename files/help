@@ -1,0 +1,148 @@
+#!/usr/bin/env bash
+
+# Colors
+r='\033[1;91m'
+p='\033[1;95m'
+y='\033[1;93m'
+g='\033[1;92m'
+n='\033[0m'
+b='\033[1;94m'
+c='\033[1;96m'
+w='\033[1;97m'
+lp='\033[38;5;141m'
+
+# Symbols
+X='\033[1;92m[\033[1;00m⎯꯭̽𓆩\033[1;92m]\033[1;96m'
+D='\033[1;92m[\033[1;00m〄\033[1;92m]\033[1;93m'
+E='\033[1;92m[\033[1;00m×\033[1;92m]\033[1;91m'
+A='\033[1;92m[\033[1;00m+\033[1;92m]\033[1;92m'
+C='\033[1;92m[\033[1;00m</>\033[1;32m]\033[1;92m'
+
+# Icons
+aHELL="\uf489"
+USER="\uf007"
+STAR="\uf005"
+CROWN="\uf521"
+DIAMOND="\uf219"
+
+# Username
+if [ -d "/data/data/com.termux/files/usr/" ]; then
+    DIR="$HOME/.termux"
+else
+    DIR="$HOME/.CODEX"
+fi
+USERNAME_FILE="$DIR/usernames.txt"
+if [ -f "$USERNAME_FILE" ]; then username=$(cat "$USERNAME_FILE"); else username="CODEX"; fi
+
+random_number=$(( RANDOM % 2 ))
+
+exit_script() {
+    echo
+    echo -e "${c}              (\\_/)"
+    echo -e "              (${y}^_^${c})     ${A} ${g}Hey dear${c}"
+    echo -e "             ⊂(___)づ  ⋅˚₊‧ ଳ ‧₊˚ ⋅"
+    echo
+    echo -e " ${A} ${c}Exiting ${g}help menu \033[1;36m"
+    echo
+    exit 0
+}
+trap exit_script SIGINT SIGTSTP
+
+# Device
+if command -v getprop &>/dev/null; then
+    MODEL=$(getprop ro.product.model 2>/dev/null)
+    VENDOR=$(getprop ro.product.manufacturer 2>/dev/null)
+else
+    MODEL=$(hostname)
+    VENDOR=$(uname -o)
+fi
+devicename="${VENDOR} ${MODEL}"
+
+# Disk
+THRESHOLD=100
+check_disk_usage() {
+    local threshold=${1:-$THRESHOLD}
+    local total_size used_size disk_usage
+    total_size=$(df -h "$HOME" | awk 'NR==2 {print $2}')
+    used_size=$(df -h "$HOME" | awk 'NR==2 {print $3}')
+    disk_usage=$(df "$HOME" | awk 'NR==2 {print $5}' | sed 's/%//g')
+    if [ "$disk_usage" -ge "$threshold" ]; then
+        echo -e "${g}[${n}\uf0a0${g}] ${r}WARN: ${y}Disk Full ${g}${disk_usage}% ${c}| ${c}U${g}${used_size} ${c}of ${c}T${g}${total_size}"
+    else
+        echo -e "${y}Disk usage: ${g}${disk_usage}% ${c}| ${g}${used_size}"
+    fi
+}
+data=$(check_disk_usage)
+
+# Header
+if [ $random_number -eq 0 ]; then
+    echo -e "\n\n              ${g}Hey ${y}$username"
+    echo -e "${c}         (\\_/)"
+    echo -e "         (${y}^ω^${c})     ${g}I'm Dx-Simu${c}"
+    echo -e "        ⊂(___)づ  ⋅˚₊‧ ଳ ‧₊˚ ⋅"
+    echo
+    echo -e " ${A} ${c}All Command ${g}Codex Banner¡${c}"
+else
+    echo -e "\n\n   ${c}___  _  _       __  __  ___  ___  _  _"
+    echo -e "  ${c}(   \\( \\/ )___  / _)/  \\(   \\(  _)( \\/ )"
+    echo -e "  ${n} ) ) ))  ((___)( (_( () )) ) )) _) )  ("
+    echo -e " ${y} (___/(_/\\_)     \\__)\\__/(___/(___)(_/\\_)"
+    echo
+    echo -e " ${A} ${c}All Command ${g}Codex Banner¡${c}"
+fi
+
+# Info bar
+echo -e "\n${b}╭══ ${g}〄 ${y}ᴄᴏᴅᴇx ${g}〄"
+echo -e "${b}┃❁ ${g}ᴄʀᴇᴀᴛᴏʀ: ${y}ᴅx-ᴄᴏᴅᴇx"
+echo -e "${b}┃❁ ${g}ᴅᴇᴠɪᴄᴇ: ${y}${devicename}"
+echo -e "${b}┃❁ ${g}ᴅɪꜱᴋ: ${y}${data}"
+echo -e "${b}╰┈➤ ${g}[${n}${USER}${g}] ${g}Hey ${y}${username}"
+
+echo
+echo -e "${b}╭═════════════════⊷"
+echo -e "${b}┃ ${g}[${n}\uf6c3${g}] ${y}ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅ"
+echo -e "${b}╰═════════════════⊷${n}"
+echo
+
+# Main Commands
+echo -e "${b}╭═════❂ ${g}${aHELL} ᴄᴏʀᴇ ᴄᴏᴍᴍᴀɴᴅ ${b}❂═════⊷"
+echo -e "${b}┃ ${p}❏ ${g}help       ${p}[ᴄᴏᴅᴇx ʜᴇʟᴘ ᴍᴇɴᴜ]"
+echo -e "${b}┃ ${p}❏ ${g}bname      ${p}[ᴄʜᴀɴɢᴇ ʙᴀɴɴᴇʀ ɴᴀᴍᴇ]"
+echo -e "${b}┃ ${p}❏ ${g}unstall    ${p}[ᴜɴɪɴꜱᴛᴀʟʟ ꜱᴄʀɪᴘᴛ/ᴛᴏᴏʟꜱ]"
+echo -e "${b}┃ ${p}❏ ${g}chat       ${p}[ᴄᴏᴅᴇx ɢʟᴏʙᴀʟ ᴄʜᴀᴛ]"
+echo -e "${b}┃ ${p}❏ ${g}dev        ${p}[ʀᴇᴘᴏʀᴛ ᴅᴇᴠᴇʟᴏᴘᴇʀ]"
+echo -e "${b}┃ ${p}❏ ${g}report     ${p}[ʀᴇᴘᴏʀᴛ ᴅᴇᴠᴇʟᴏᴘᴇʀ]"
+echo -e "${b}┃ ${p}❏ ${g}update     ${p}[ᴜᴘᴅᴀᴛᴇ ᴄᴏᴅᴇx ʙᴀɴɴᴇʀ]"
+echo -e "${b}╰═══════════════════════⊷"
+echo
+
+# New Advanced Commands
+echo -e "${b}╭═════❂ ${g}${CROWN} ɴᴇᴡ ᴀᴅᴠᴀɴᴄᴇᴅ ᴄᴍᴅ ${b}❂═════⊷"
+echo -e "${b}┃ ${c}❏ ${g}btheme     ${c}[ᴄʜᴀɴɢᴇ ʙᴀɴɴᴇʀ ᴛʜᴇᴍᴇ (6 ꜱᴛʏʟᴇꜱ)]"
+echo -e "${b}┃ ${c}❏ ${g}btheme N   ${c}[ꜱᴇᴛ ᴛʜᴇᴍᴇ ᴅɪʀᴇᴄᴛʟʏ (1-6)]"
+echo -e "${b}┃ ${c}❏ ${g}sysinfo    ${c}[ꜰᴜʟʟ ꜱʏꜱᴛᴇᴍ ɪɴꜰᴏ ᴘᴀɴᴇʟ]"
+echo -e "${b}┃ ${c}❏ ${g}note       ${c}[ꜱʜᴏᴡ ɴᴏᴛᴇꜱ]"
+echo -e "${b}┃ ${c}❏ ${g}note TEXT  ${c}[ꜱᴀᴠᴇ ᴀ ɴᴏᴛᴇ]"
+echo -e "${b}┃ ${c}❏ ${g}note clear ${c}[ᴄʟᴇᴀʀ ᴀʟʟ ɴᴏᴛᴇꜱ]"
+echo -e "${b}┃ ${c}❏ ${g}note del N ${c}[ᴅᴇʟᴇᴛᴇ ɴᴏᴛᴇ #ɴ]"
+echo -e "${b}┃ ${c}❏ ${g}ip         ${c}[ꜱʜᴏᴡ ᴘᴜʙʟɪᴄ ɪᴘ]"
+echo -e "${b}┃ ${c}❏ ${g}weather    ${c}[ᴄᴜʀʀᴇɴᴛ ᴡᴇᴀᴛʜᴇʀ]"
+echo -e "${b}┃ ${c}❏ ${g}weather X  ${c}[ᴡᴇᴀᴛʜᴇʀ ꜰᴏʀ ᴄɪᴛʏ X]"
+echo -e "${b}╰═══════════════════════⊷"
+echo
+
+# Mini Commands
+echo -e "${b}╭═════❂ ${g}${aHELL} ᴍɪɴɪ ᴄᴏᴍᴍᴀɴᴅ ${b}❂═════⊷"
+echo -e "${b}┃ ${p}❏ ${g}ls       ${p}[ʟɪsᴛ ᴀʟʟ]"
+echo -e "${b}┃ ${p}❏ ${g}lt       ${p}[ʟɪsᴛ ᴛʀᴇᴇ]"
+echo -e "${b}┃ ${p}❏ ${g}clear    ${p}[ᴄʟᴇᴀʀ + ᴅᴀꜱʜʙᴏᴀʀᴅ]"
+echo -e "${b}┃ ${p}❏ ${g}clear n  ${p}[ᴄʟᴇᴀʀ ᴅᴇꜰᴀᴜʟᴛ]"
+echo -e "${b}┃ ${p}❏ ${g}exit     ${p}[ᴇxɪᴛ ᴅᴇꜰᴀᴜʟᴛ]"
+echo -e "${b}┃ ${p}❏ ${g}exit x   ${p}[ᴇxɪᴛ ᴀᴅᴠᴀɴᴄᴇ]"
+echo -e "${b}╰═══════════════════════⊷"
+
+# Banner themes hint
+echo
+echo -e " ${D} ${y}Banner Styles: ${g}1${n}=Original ${g}2${n}=Slant ${g}3${n}=Flame ${g}4${n}=Matrix ${g}5${n}=Minimal ${g}6${n}=Royal"
+echo -e " ${D} ${c}Type ${g}btheme${c} to switch interactively${n}"
+echo

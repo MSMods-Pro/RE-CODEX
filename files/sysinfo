@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+# sysinfo — CODEX System Info Panel
+
+r='\033[1;91m'; p='\033[1;95m'; y='\033[1;93m'; g='\033[1;92m'
+n='\033[0m'; b='\033[1;94m'; c='\033[1;96m'; w='\033[1;97m'
+A='\033[1;92m[\033[1;00m+\033[1;92m]\033[1;92m'
+USER="\uf007"; DIAMOND="\uf219"
+
+if [ -d "/data/data/com.termux/files/usr/" ]; then
+    uname_file="$HOME/.termux/usernames.txt"
+else
+    uname_file="$HOME/.CODEX/usernames.txt"
+fi
+[ -f "$uname_file" ] && uname_val=$(cat "$uname_file") || uname_val="CODEX"
+
+if command -v getprop &>/dev/null; then
+    vendor=$(getprop ro.product.manufacturer 2>/dev/null)
+    model=$(getprop ro.product.model 2>/dev/null)
+    os_info="Android (Termux)"
+else
+    vendor=$(uname -s)
+    model=$(uname -n)
+    os_info=$(uname -o 2>/dev/null || echo "Linux")
+fi
+
+kernel=$(uname -r)
+shell_v="${ZSH_VERSION:-$(zsh --version 2>/dev/null | awk '{print $2}')}"
+cpu_info=$(grep -m1 "model name" /proc/cpuinfo 2>/dev/null | cut -d: -f2 | xargs || echo "N/A")
+ram_total=$(free -h 2>/dev/null | awk '/Mem:/{print $2}' || echo "N/A")
+ram_used=$(free -h 2>/dev/null | awk '/Mem:/{print $3}' || echo "N/A")
+disk_used=$(df -h "$HOME" | awk 'NR==2 {print $3}')
+disk_total=$(df -h "$HOME" | awk 'NR==2 {print $2}')
+disk_pct=$(df "$HOME" | awk 'NR==2 {print $5}')
+uptime_str=$(uptime -p 2>/dev/null | sed 's/up //' || echo "N/A")
+
+clear
+echo
+echo -e " ${b}╭══════════════════════════════════════════════╗"
+echo -e " ${b}║  ${g}${DIAMOND} ${y}CODEX SYSTEM INFORMATION ${g}${DIAMOND}             ${b}║"
+echo -e " ${b}╠══════════════════════════════════════════════╣"
+echo -e " ${b}║  ${c}${USER}  ${g}User     ${b}: ${w}${uname_val}"
+echo -e " ${b}║  ${c}\uf6c3  ${g}Device   ${b}: ${w}${vendor} ${model}"
+echo -e " ${b}║  ${c}\uf6a6  ${g}OS       ${b}: ${w}${os_info}"
+echo -e " ${b}║  ${c}\uf83c  ${g}Kernel   ${b}: ${w}${kernel}"
+echo -e " ${b}║  ${c}\ue7a2  ${g}Shell    ${b}: ${w}zsh ${shell_v}"
+echo -e " ${b}║  ${c}\uf2db  ${g}CPU      ${b}: ${w}${cpu_info}"
+echo -e " ${b}║  ${c}\uf538  ${g}RAM      ${b}: ${w}${ram_used} / ${ram_total}"
+echo -e " ${b}║  ${c}\uf0a0  ${g}Storage  ${b}: ${w}${disk_used} / ${disk_total} (${disk_pct})"
+echo -e " ${b}║  ${c}⏱   ${g}Uptime   ${b}: ${w}${uptime_str}"
+echo -e " ${b}╚══════════════════════════════════════════════╝${n}"
+echo
